@@ -5,12 +5,14 @@
         android:id="@+id/pbba_button_open_banking_app"
         style="@style/PBBAButton.Container"
         android:layout_width="@dimen/pbba_button_width"
-        android:layout_height="@dimen/pbba_button_height"
+        android:layout_height="@dimen/pbba_popup_button_height"
         android:contentDescription="@string/pbba_accessibility_open_banking_app">
 
         <com.zapp.library.merchant.ui.view.CustomTextView
             android:id="@+id/pbba_button_open_banking_app_text"
             style="@style/PBBAButton.Text"
+            android:textSize="@dimen/pbb_button_text_size"
+            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/pbba_button_text_open_banking_app" />

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pbba="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/pbba_popup_header"
+        layout="@layout/pbba_popup_section_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
+    <include
+        android:id="@+id/pbba_popup_footer"
+        layout="@layout/pbba_popup_section_footer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/pbba_popup_footer"
+        android:layout_below="@id/pbba_popup_header"
+        android:clipToPadding="true"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/pbba_popup_ecomm_layout_margin"
+                android:layout_marginTop="@dimen/pbba_popup_ecomm_layout_margin_top"
+                android:layout_marginRight="@dimen/pbba_popup_ecomm_layout_margin"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true">
+
+                        <ImageView
+                            android:id="@+id/image_first_step"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:contentDescription="@string/pbba_popup_about_indicator_first"
+                            pbba:srcCompat="@drawable/pbba_ecomm_first_step_image" />
+
+                        <com.zapp.library.merchant.ui.view.CustomTextView
+                            android:id="@+id/pbba_ecomm_first_step_text_view"
+                            style="@style/PBBAPopup.Text.Regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image_first_step"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/pbba_popup_ecomm_step_text_margin_top"
+                            android:textAlignment="center"
+                            android:textColor="@color/pbba_dark_text_color"
+                            android:textSize="@dimen/pbba_ecomm_second_step_text_view_size" />
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true">
+
+                        <ImageView
+                            android:id="@+id/image_second_step"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:contentDescription="@string/pbba_popup_about_indicator_second"
+                            pbba:srcCompat="@drawable/pbba_ecomm_second_step_image" />
+
+                        <com.zapp.library.merchant.ui.view.CustomTextView
+                            android:id="@+id/pbba_ecomm_second_step_text_view"
+                            style="@style/PBBAPopup.Text.Regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image_second_step"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/pbba_popup_ecomm_step_text_margin_top"
+                            android:gravity="center"
+                            android:textAlignment="center"
+                            android:textColor="@color/pbba_dark_text_color"
+                            android:textSize="@dimen/pbba_ecomm_second_step_text_view_size" />
+
+                    </RelativeLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/pbba_popup_ecomm_third_step_block_margin_top"
+                android:layout_marginBottom="@dimen/pbba_ecomm_third_step_margin_bottom"
+                android:gravity="center">
+
+                <RelativeLayout
+                    android:id="@+id/pbba_popup_third_step_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/pbba_popup_ecomm_third_step_margin_left"
+                    android:layout_marginLeft="@dimen/pbba_popup_ecomm_third_step_margin_left"
+                    android:layout_marginTop="@dimen/pbba_popu_ecomm_third_step_margin_top"
+                    android:background="@drawable/pbba_third_step_background"
+                    android:gravity="center_horizontal">
+                    
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/pbba_popup_text_third"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/pbba_popup_ecomm_third_step_indicator_background"
+                    android:gravity="center"
+                    android:contentDescription="@string/pbba_popup_about_indicator_third_moreabout"
+                    android:text="@string/pbba_popup_about_indicator_third"
+                    android:textColor="@color/pbba_popup_about_indicator_color"
+                    android:textSize="@dimen/pbba_ecomm_indicator_text_size"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <com.zapp.library.merchant.ui.view.CustomTextView
+                android:id="@+id/pbba_popup_ecomm_secure_message"
+                style="@style/PBBAPopup.Text.Regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:textColor="@color/pbba_dark_text_color"
+                android:textSize="@dimen/pbba_ecomm_second_step_text_view_size" />
+
+            <include
+                android:id="@+id/pbba_popup_about_available_apps_block"
+                layout="@layout/pbba_popup_section_available_bank_apps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/pbba_available_bank_app_margin"
+                android:layout_marginLeft="@dimen/pbba_available_bank_app_margin"
+                android:layout_marginTop="@dimen/pbba_ecomm_available_bank_margin_top" />
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>

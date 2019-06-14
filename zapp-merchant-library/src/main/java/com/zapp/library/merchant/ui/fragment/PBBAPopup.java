@@ -15,24 +15,47 @@
  */
 package com.zapp.library.merchant.ui.fragment;
 
-import com.zapp.library.merchant.R;
-import com.zapp.library.merchant.ui.PBBAPopupCallback;
-import com.zapp.library.merchant.util.PBBALibraryUtils;
-
 import android.app.Dialog;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.Loader;
+import android.support.v4.view.AccessibilityDelegateCompat;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
+import com.zapp.library.merchant.R;
+import com.zapp.library.merchant.network.AvailableBankAppsLoader;
+import com.zapp.library.merchant.network.response.AvailableBankAppsResponse;
+import com.zapp.library.merchant.network.response.PBBABankLogoResponse;
+import com.zapp.library.merchant.ui.PBBAPopupCallback;
+import com.zapp.library.merchant.ui.view.CustomButtonView;
+import com.zapp.library.merchant.util.FilterAvailableBankAppsByLargeLogo;
+import com.zapp.library.merchant.util.RichStyleStringBuilder;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * The base Pay by Bank app Popup Fragment.
@@ -41,7 +64,19 @@ import java.lang.ref.WeakReference;
  * @since 1.0.0
  */
 @SuppressWarnings("AbstractClassExtendsConcreteClass")
-public abstract class PBBAPopup extends DialogFragment {
+public abstract class PBBAPopup extends DialogFragment implements LoaderManager.LoaderCallbacks<PBBABankLogoResponse> {
+
+    private static final int DISPLAY_COUNT = 4;
+    private static final int AVAILABLE_BANK_APPS_LOADER_ID = 3;
+
+    /**
+     * The gateway response for the "available bank apps"
+     */
+    private PBBABankLogoResponse mGetAvailableBankAppsResponse;
+
+    private LinearLayout ltAvailableAppsFirstBlock;
+    private LinearLayout ltAvailableAppsSecondBlock;
+    private View ltAvailableAppsBlock;
 
     /**
      * Tag for logging and fragment tagging.
@@ -50,15 +85,12 @@ public abstract class PBBAPopup extends DialogFragment {
     public static final String TAG = PBBAPopup.class.getSimpleName();
 
     /**
-     * Web link to 'what is Pay by Bank app' web page.
-     */
-    private static final String WHAT_IS_PAY_BY_BANK_APP_LINK = "http://www.paybybankapp.co.uk/how-it-works/the-experience/";
-
-    /**
      * The (weak reference to the) callback interface to the popup controller.
      */
     @Nullable
     private WeakReference<PBBAPopupCallback> mCallbackWeakReference;
+    protected TextView secureMessageText;
+    protected RelativeLayout ltThirdStepLayout;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -119,21 +151,128 @@ public abstract class PBBAPopup extends DialogFragment {
                 }
             });
         }
-        final View whatIsPayByBankAppLink = view.findViewById(R.id.pbba_link_what_is_pay_by_bank_app);
-        if (whatIsPayByBankAppLink != null) {
-            whatIsPayByBankAppLink.setOnClickListener(new View.OnClickListener() {
+
+        final AppCompatImageView image = (AppCompatImageView) view.findViewById(R.id.pbba_popup_pay_by_bank_app_logo_text);
+        if (image != null) {
+           final AccessibilityDelegateCompat delegate = new AccessibilityDelegateCompat() {
                 @Override
-                public void onClick(final View v) {
-                    try {
-                        final Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(WHAT_IS_PAY_BY_BANK_APP_LINK));
-                        startActivity(myIntent);
-                    } catch (ActivityNotFoundException ignored) {
-                        //no web browser installed, ignore the error
-                        Log.w(PBBALibraryUtils.PBBA_LOG_TAG, "Cannot start 'What is Pay by Bank app' link: no browser installed?");
-                    }
+                public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfoCompat info) {
+                    info.setImportantForAccessibility(true);
+                    info.setFocusable(true);
+                    super.onInitializeAccessibilityNodeInfo(host, info);
+                    info.setContentDescription(getString(R.string.pbba_button_content_description));
                 }
-            });
+            };
+
+            final Runnable task = new Runnable() {
+                @Override
+                public void run() {
+                    image.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
+                }
+            };
+            final ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();
+            worker.schedule(task, 500, TimeUnit.MILLISECONDS);
+
+            ViewCompat.setAccessibilityDelegate(image, delegate);
         }
+
+        secureMessageText = (TextView) view.findViewById(R.id.pbba_popup_ecomm_secure_message);
+        ltThirdStepLayout = (RelativeLayout) view.findViewById(R.id.pbba_popup_third_step_layout);
+
+        ltAvailableAppsFirstBlock = (LinearLayout) view.findViewById(R.id.pbba_popup_about_available_apps_first);
+        ltAvailableAppsSecondBlock = (LinearLayout) view.findViewById(R.id.pbba_popup_about_available_apps_second);
+        ltAvailableAppsBlock = view.findViewById(R.id.pbba_popup_about_available_apps_block);
+    }
+
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        Log.v(TAG, String.format("onActivityCreated (%s): savedInstanceState: %s, activity: %s", this, savedInstanceState, getActivity()));
+        super.onActivityCreated(savedInstanceState);
+        if (shouldLoadAvailableBankApps()) {
+            Log.v(TAG, "onActivityCreated initLoader: ");
+            getLoaderManager().initLoader(AVAILABLE_BANK_APPS_LOADER_ID, null, this);
+        }
+    }
+
+    @Override
+    public Loader<PBBABankLogoResponse> onCreateLoader(final int id, final Bundle args) {
+        return new AvailableBankAppsLoader(getActivity(), new FilterAvailableBankAppsByLargeLogo());
+    }
+
+    @Override
+    public void onLoadFinished(final Loader<PBBABankLogoResponse> loader, final PBBABankLogoResponse data) {
+        mGetAvailableBankAppsResponse = data;
+        if (ltAvailableAppsBlock != null && ltAvailableAppsFirstBlock != null && ltAvailableAppsSecondBlock != null) {
+            updateUI();
+        }
+    }
+
+    private void updateUI() {
+        final List<AvailableBankAppsResponse> list = mGetAvailableBankAppsResponse.getAvailableBankAppsResponseList();
+        if (list != null && list.size() > 0) {
+            if (list.size() > DISPLAY_COUNT) {
+                final List<AvailableBankAppsResponse> firstBlock = list.subList(0, DISPLAY_COUNT);
+                final List<AvailableBankAppsResponse> secondBlock = list.subList(DISPLAY_COUNT, list.size());
+                displayLogo(ltAvailableAppsFirstBlock, firstBlock);
+                displayLogo(ltAvailableAppsSecondBlock, secondBlock);
+            } else {
+                displayLogo(ltAvailableAppsFirstBlock, list);
+            }
+            ltAvailableAppsBlock.setVisibility(View.VISIBLE);
+        } else {
+            ltAvailableAppsBlock.setVisibility(View.GONE);
+        }
+    }
+
+    private void displayLogo(final LinearLayout view, final List<AvailableBankAppsResponse> list) {
+        view.setVisibility(View.VISIBLE);
+        for (final AvailableBankAppsResponse bank : list) {
+            final View rootView = LayoutInflater.from(getActivity()).inflate(R.layout.pbba_popup_about_item_app,
+                    null);
+            final ImageView imageView = (ImageView) rootView.findViewById(R.id.pbba_available_bank_image);
+            imageView.setContentDescription(bank.getBankName() + getString(R.string.accesibility_image_text));
+            view.addView(rootView, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            Glide.with(this).load(bank.getLargeLogo())
+                    .apply(RequestOptions.bitmapTransform(new RoundedCorners(getContext().getResources().getDimensionPixelSize(R.dimen.pbba_available_bank_app_corner))))
+                    .apply(RequestOptions.centerCropTransform())
+                    .into(imageView);
+        }
+    }
+
+    protected void configureStepsTextMessage(final View view) {
+        final int orangeTextColor = ContextCompat.getColor(getContext(), R.color.pbba_step_message_orange_color);
+        final Typeface medium = Typeface.createFromAsset(getContext().getAssets(), getString(R.string.pbba_popup_semibold_font));
+
+        final TextView firstStepMessageView = (TextView) view.findViewById(R.id.pbba_ecomm_first_step_text_view);
+        final String firstStepLogIn = getString(R.string.pbba_ecomm_first_step_log_in);
+        final String firstStepFullText = getString(R.string.pbba_ecomm_first_step_text, firstStepLogIn);
+        final RichStyleStringBuilder firstStep = RichStyleStringBuilder.of(firstStepFullText);
+        firstStep.withColor(firstStepLogIn, orangeTextColor);
+        firstStep.withFont(firstStepLogIn, medium);
+        firstStepMessageView.setText(firstStep.build());
+
+        final TextView secondStepMessageView = (TextView) view.findViewById(R.id.pbba_ecomm_second_step_text_view);
+        final String secondStepFind = getString(R.string.pbba_ecomm_second_step_find);
+        final String secondPBBAText = getString(R.string.pbba_ecomm_second_step_pay_by_bank);
+        final String secondFullText = getString(R.string.pbba_ecomm_second_step_text, secondStepFind, secondPBBAText);
+        final RichStyleStringBuilder secondStep = RichStyleStringBuilder.of(secondFullText);
+        secondStep.withColor(secondStepFind, orangeTextColor);
+        secondStep.withFont(secondStepFind, medium);
+        secondStep.withFont(secondPBBAText, medium);
+        secondStepMessageView.setText(secondStep.build());
+
+        final String thirdStepEnter = getString(R.string.pbba_ecomm_third_step_enter);
+        final String thirdFullText = getString(R.string.pbba_ecomm_third_step_text, thirdStepEnter);
+        final RichStyleStringBuilder thirdStep = RichStyleStringBuilder.of(thirdFullText);
+        thirdStep.withColor(thirdStepEnter, orangeTextColor);
+        thirdStep.withFont(thirdStepEnter, medium);
+        secureMessageText.setText(thirdStep.build());
+    }
+
+    @Override
+    public void onLoaderReset(final Loader<PBBABankLogoResponse> loader) {
+        Log.v(TAG, String.format("onLoaderReset (%s): loader: %s", this, loader));
     }
 
     /**
@@ -144,6 +283,63 @@ public abstract class PBBAPopup extends DialogFragment {
     @Nullable
     PBBAPopupCallback getCallback() {
         return mCallbackWeakReference != null ? mCallbackWeakReference.get() : null;
+    }
+
+    /**
+     * Should be override in case when on popup shouldn't load available bank apps
+     *
+     * @return boolean value. If it's true will load the available bank apps otherwise won't load
+     */
+    protected boolean shouldLoadAvailableBankApps() {
+        return true;
+    }
+
+    /**
+     * Display error layout with message, title and try again button
+     *
+     * @param errorTitle   The error title to use
+     * @param errorMessage The error message to use.
+     */
+    public void setErrorMessage(@NonNull final String errorTitle, @NonNull final String errorMessage) {
+        final View view = LayoutInflater.from(getContext()).inflate(R.layout.pbba_popup_error_layout, null, false);
+        final TextView title = (TextView) view.findViewById(R.id.pbba_popup_error_title_text);
+        final TextView message = (TextView) view.findViewById(R.id.pbba_popup_error_message_text);
+        final CustomButtonView tryAgain = (CustomButtonView) view.findViewById(R.id.pbba_popup_error_button);
+
+        if (tryAgain != null) {
+            tryAgain.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final PBBAPopupCallback callback = getCallback();
+                    if (callback != null) {
+                        callback.onRetryPaymentRequest();
+                    }
+                }
+            });
+        }
+        title.setText(errorTitle);
+        message.setText(errorMessage);
+
+        if (ltThirdStepLayout != null) {
+            ltThirdStepLayout.removeAllViews();
+            ltThirdStepLayout.addView(view);
+            if (ltThirdStepLayout != null) {
+                ltThirdStepLayout.removeAllViews();
+                ltThirdStepLayout.addView(view);
+
+                Runnable task = new Runnable() {
+                    @Override
+                    public void run() {
+                        title.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
+                    }
+                };
+                final ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();
+                worker.schedule(task, 1, TimeUnit.SECONDS);
+            }
+        }
+        if (secureMessageText != null) {
+            secureMessageText.setVisibility(View.GONE);
+        }
     }
 
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pbba="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerVertical="true"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <com.zapp.library.merchant.ui.view.CustomTextView
+        style="@style/PBBAPopup.Text.Regular"
+        android:textSize="@dimen/pbba_ecomm_second_step_text_view_size"
+        android:textColor="@color/pbba_dark_text_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center"
+        pbba:htmlText="@string/pbba_popup_about_available" />
+
+    <LinearLayout
+        android:id="@+id/pbba_popup_available_banking_app"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/pbba_available_bank_apps_margin_top"
+        android:divider="@drawable/pbba_popup_about_divider"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/pbba_popup_about_available_apps_first"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/pbba_available_bank_apps_container_height"
+            android:divider="@drawable/pbba_popup_about_divider"
+            android:orientation="horizontal"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/pbba_popup_about_available_apps_second"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/pbba_available_bank_apps_container_height"
+            android:layout_marginTop="@dimen/pbba_available_bank_apps_container_top_margin"
+            android:divider="@drawable/pbba_popup_about_divider"
+            android:orientation="horizontal"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

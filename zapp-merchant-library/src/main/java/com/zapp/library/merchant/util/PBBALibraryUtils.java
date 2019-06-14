@@ -21,6 +21,7 @@ import android.content.res.AssetManager;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -55,6 +56,11 @@ public final class PBBALibraryUtils {
     public static final String KEY_CFI_APP_NAME = "cfiAppName";
 
     /**
+     * The Pay by Bank app cfi scheme configuration key.
+     */
+    public static final String KEY_CFI_SCHEME = "cfiScheme";
+
+    /**
      * Standard PBBA theme value.
      */
     public static final int PBBA_THEME_STANDARD = 1;
@@ -80,6 +86,11 @@ public final class PBBALibraryUtils {
     public static final int CFI_APP_NAME_PBBA = 1;
 
     /**
+     * The value identifier for Pingit app name.
+     */
+    public static final int CFI_APP_NAME_PINGIT = 2;
+
+    /**
      * The default value identifier for CFI app name.
      */
     public static final int CFI_APP_NAME_DEFAULT = CFI_APP_NAME_PBBA;
@@ -88,6 +99,21 @@ public final class PBBALibraryUtils {
      * Constant for banking app button clicked shared preferences key.
      */
     private static final String BANKING_APP_BTN_CLICKED = "openBankingAppButtonClicked";
+
+    /**
+     * The default value identifier for zapp scheme
+     */
+    private static final String ZAPP_SCHEME = "zapp";
+
+    /**
+     * The Pay by Bank app cfi logos CDN PATH.
+     */
+    public static final String KEY_CFI_LOGOS_CDN_PATH = "cfiLogosCDNPath";
+
+    /**
+     * The default value identifier for CFI Logos CDN PATH.
+     */
+    private static final String CFI_LOGOS_CDN_PATH_DEFAULT = "";
 
     /**
      * The custom configuration.
@@ -170,6 +196,32 @@ public final class PBBALibraryUtils {
         } catch (NumberFormatException ignored) {
             return CFI_APP_NAME_DEFAULT;
         }
+    }
+
+    /**
+     * Get the CFI Logos CDN Path value.
+     *
+     * @param context The context to use.
+     * @return The CFI Logos CDN Path value.
+     */
+    public static String getCfiLogosCDNPath(@NonNull final Context context) {
+
+        final String url = getCustomConfiguration(context).getProperty(KEY_CFI_LOGOS_CDN_PATH);
+
+        if (TextUtils.isEmpty(url)){
+            return CFI_LOGOS_CDN_PATH_DEFAULT;
+        }
+        return url;
+    }
+
+    /**
+     * Get the Zapp Scheme value
+     *
+     * @param context The context to use
+     * @return The Zapp scheme value
+     */
+    public static String getZappScheme(@NonNull final Context context) {
+        return getCustomConfiguration(context).getProperty(KEY_CFI_SCHEME, ZAPP_SCHEME);
     }
 
     /**

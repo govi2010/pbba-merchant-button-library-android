@@ -15,10 +15,6 @@
  */
 package com.zapp.library.merchant.ui.fragment;
 
-import com.zapp.library.merchant.R;
-import com.zapp.library.merchant.ui.PBBAPopupCallback;
-import com.zapp.library.merchant.ui.view.PBBAButton;
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,7 +22,8 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
+import com.zapp.library.merchant.R;
 
 /**
  * Pay by Bank app popup implementation for error popups.
@@ -93,40 +90,29 @@ public final class PBBAPopupErrorFragment extends PBBAPopup {
     }
 
     @Override
-    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        final View content = inflater.inflate(R.layout.pbba_popup_fragment_error, container, false);
+    public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.pbba_popup_fragment, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         final Bundle arguments = getArguments();
 
-        final TextView titleTextView = (TextView) content.findViewById(R.id.pbba_popup_error_title_text);
         final String errorTitle = arguments.getString(KEY_ERROR_TITLE);
-        if (TextUtils.isEmpty(errorTitle)) {
-            titleTextView.setText(getString(R.string.pbba_popup_error_generic_title));
-        } else {
-            titleTextView.setText(errorTitle);
-        }
+        final String displayTitle = TextUtils.isEmpty(errorTitle) ? getString(R.string.pbba_popup_error_generic_title) : errorTitle;
 
-        final TextView messageTextView = (TextView) content.findViewById(R.id.pbba_popup_error_message_text);
         final String errorCode = arguments.getString(KEY_ERROR_CODE);
         final String errorMessage = arguments.getString(KEY_ERROR_MESSAGE);
+        final String displayMessage;
         if (TextUtils.isEmpty(errorMessage)) {
-            messageTextView.setText(getString(R.string.pbba_popup_error_generic_message));
+            displayMessage = getString(R.string.pbba_popup_error_generic_message);
         } else {
-            final String errorMessageText = TextUtils.isEmpty(errorCode) ? errorMessage : String.format("%s (%s)", errorMessage, errorCode);
-            messageTextView.setText(errorMessageText);
+            displayMessage = TextUtils.isEmpty(errorCode) ? errorMessage : String.format("%s (%s)", errorMessage, errorCode);
         }
 
-        final PBBAButton pbbaButton = (PBBAButton) content.findViewById(R.id.pbba_button);
-        pbbaButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                final PBBAPopupCallback callback = getCallback();
-                if (callback != null) {
-                    callback.onRetryPaymentRequest();
-                }
-            }
-        });
-
-        return content;
+        setErrorMessage(displayTitle, displayMessage);
+        configureStepsTextMessage(view);
     }
 
     /**

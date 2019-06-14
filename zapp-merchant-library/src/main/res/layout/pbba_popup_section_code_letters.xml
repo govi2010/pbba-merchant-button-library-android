@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@id/pbba_popup_code_container"
+    android:id="@+id/pbba_popup_code_container"
+    android:contentDescription="@string/pbba_accessibility_show_brn_view_text"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <LinearLayout
         style="@style/PBBACode.Group"
+        android:focusable="true"
+        android:focusableInTouchMode="false"
         android:layout_marginRight="@dimen/pbba_popup_code_group_margin_left_right"
         tools:ignore="RtlHardcoded">
 
         <com.zapp.library.merchant.ui.view.CustomTextView
             android:id="@+id/code_value_1"
+             android:focusable="true"
+            android:focusableInTouchMode="false"
             style="@style/PBBACode.Value"
             tools:text="Z" />
 
@@ -19,6 +24,8 @@
 
         <com.zapp.library.merchant.ui.view.CustomTextView
             android:id="@+id/code_value_2"
+             android:focusable="true"
+            android:focusableInTouchMode="false"
             style="@style/PBBACode.Value"
             tools:text="P" />
 
@@ -26,6 +33,8 @@
 
         <com.zapp.library.merchant.ui.view.CustomTextView
             android:id="@+id/code_value_3"
+             android:focusable="true"
+            android:focusableInTouchMode="false"
             style="@style/PBBACode.Value"
             tools:text="P" />
     </LinearLayout>
@@ -33,10 +42,14 @@
     <LinearLayout
         style="@style/PBBACode.Group"
         android:layout_marginLeft="@dimen/pbba_popup_code_group_margin_left_right"
+        android:focusable="true"
+        android:focusableInTouchMode="false"
         tools:ignore="RtlHardcoded">
 
         <com.zapp.library.merchant.ui.view.CustomTextView
             android:id="@+id/code_value_4"
+             android:focusable="true"
+            android:focusableInTouchMode="false"
             style="@style/PBBACode.Value"
             tools:text="B" />
 
@@ -44,6 +57,8 @@
 
         <com.zapp.library.merchant.ui.view.CustomTextView
             android:id="@+id/code_value_5"
+             android:focusable="true"
+            android:focusableInTouchMode="false"
             style="@style/PBBACode.Value"
             tools:text="R" />
 
@@ -51,6 +66,8 @@
 
         <com.zapp.library.merchant.ui.view.CustomTextView
             android:id="@+id/code_value_6"
+             android:focusable="true"
+            android:focusableInTouchMode="false"
             style="@style/PBBACode.Value"
             tools:text="N" />
     </LinearLayout>

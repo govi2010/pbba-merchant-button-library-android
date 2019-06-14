@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/pbba_error_popup_layout_width"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:showIn="@layout/pbba_popup_fragment">
+
+    <com.zapp.library.merchant.ui.view.CustomTextView
+        android:id="@+id/pbba_popup_error_title_text"
+        style="@style/PBBAPopup.Text.ErrorTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/pbba_error_title_margin_top"
+        tools:text="Request expired" />
+
+    <com.zapp.library.merchant.ui.view.CustomTextView
+        android:id="@+id/pbba_popup_error_message_text"
+        style="@style/PBBAPopup.Text.ErrorMessage"
+        android:layout_width="@dimen/pbba_error_popup_errortext_width"
+        android:layout_marginRight="@dimen/pbba_error_popup_error_text_margin"
+        android:layout_marginLeft="@dimen/pbba_error_popup_error_text_margin"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/pbba_error_message_margin_top"
+        android:layout_gravity="center"
+        android:lines="2"
+        tools:text="Tap on the button below to generate a new code" />
+
+    <com.zapp.library.merchant.ui.view.CustomButtonView
+        android:id="@+id/pbba_popup_error_button"
+        style="@style/PBBAPopup.TryAgainButton"
+        android:layout_width="@dimen/pbba_error_button_width"
+        android:textAllCaps="false"
+        android:stateListAnimator="@null"
+        android:layout_height="@dimen/pbba_error_button_height"
+        android:layout_marginTop="@dimen/pbba_error_button_margin_top"
+        android:layout_marginBottom="@dimen/pbba_error_button_margin_bottom"
+        android:gravity="center"
+        android:text="@string/pbba_error_button_text"
+        tools:text="Try again" />
+</LinearLayout>

@@ -33,8 +33,10 @@ import android.util.Log;
 import com.zapp.library.merchant.BuildConfig;
 import com.zapp.library.merchant.ui.PBBAPopupCallback;
 import com.zapp.library.merchant.ui.fragment.PBBAPopup;
+import com.zapp.library.merchant.ui.fragment.PBBAPopupAboutFragment;
 import com.zapp.library.merchant.ui.fragment.PBBAPopupErrorFragment;
 import com.zapp.library.merchant.ui.fragment.PBBAPopupFragment;
+import com.zapp.library.merchant.ui.fragment.PBBAPopupIntermediaryFragment;
 
 /**
  * Utility class which provides API for the Merchant App developers.
@@ -44,11 +46,6 @@ import com.zapp.library.merchant.ui.fragment.PBBAPopupFragment;
  */
 @SuppressWarnings("CyclicClassDependency")
 public final class PBBAAppUtils {
-
-    /**
-     * Constant for Pay by Bank app (Zapp) custom scheme.
-     */
-    private static final String ZAPP_SCHEME = "zapp";
 
     /**
      * Zapp specific URI format string.
@@ -77,7 +74,8 @@ public final class PBBAAppUtils {
         }
 
         final Intent zappIntent = new Intent();
-        zappIntent.setData(new Uri.Builder().scheme(ZAPP_SCHEME).build());
+        final String zappScheme = PBBALibraryUtils.getZappScheme(context);
+        zappIntent.setData(new Uri.Builder().scheme(zappScheme).build());
         zappIntent.setAction(Intent.ACTION_VIEW);
         final ResolveInfo resolveInfo = context.getPackageManager().resolveActivity(zappIntent, PackageManager.MATCH_DEFAULT_ONLY);
         return resolveInfo != null;
@@ -90,7 +88,7 @@ public final class PBBAAppUtils {
      * @param context     The (activity or application) context to start the banking App.
      * @param secureToken The secure token of the payment for which the banking App is to be started.
      * @see #isCFIAppAvailable(Context)
-     * @see #showPBBAPopup(FragmentActivity, String, String, PBBAPopupCallback)
+     * @see #showPBBAPopup(FragmentActivity, String, String, PBBAPopupCallback, long)
      * @see #showPBBAErrorPopup(FragmentActivity, String, String, String, PBBAPopupCallback)
      */
     public static void openBankingApp(@NonNull Context context, @NonNull final String secureToken) {
@@ -103,7 +101,11 @@ public final class PBBAAppUtils {
         if (TextUtils.isEmpty(secureToken)) {
             throw new IllegalArgumentException("secureToken is required");
         }
-        final Uri zappUri = Uri.parse(String.format(ZAPP_URI_FORMAT_STRING, ZAPP_SCHEME, secureToken));
+        final String zappScheme = PBBALibraryUtils.getZappScheme(context);
+        if (BuildConfig.DEBUG) {
+            Log.d(PBBAAppUtils.class.getSimpleName(), "zappScheme is " + zappScheme);
+        }
+        final Uri zappUri = Uri.parse(String.format(ZAPP_URI_FORMAT_STRING, zappScheme, secureToken));
         final Intent bankingAppStartIntent = new Intent(Intent.ACTION_VIEW, zappUri);
         @SuppressWarnings("BooleanVariableAlwaysNegated") final boolean isActivityContext = context instanceof Activity;
         if (!isActivityContext) {
@@ -120,6 +122,7 @@ public final class PBBAAppUtils {
      * @param secureToken The secure token for the payment.
      * @param brn         The BRN code for the payment.
      * @param callback    The callback listener for the popup. The popup keeps {@link java.lang.ref.WeakReference} to the callback.
+     * @param timeoutTS   The timeout value in milliseconds
      * @see PBBAPopupCallback
      * @see #showPBBAErrorPopup(FragmentActivity, String, String, String, PBBAPopupCallback)
      * @see #dismissPBBAPopup(FragmentActivity)
@@ -127,7 +130,7 @@ public final class PBBAAppUtils {
      */
     @SuppressWarnings({"FeatureEnvy", "OverlyComplexMethod", "OverlyLongMethod", "ElementOnlyUsedFromTestCode"})
     public static void showPBBAPopup(@NonNull final FragmentActivity activity, @NonNull final String secureToken, @NonNull final String brn,
-                                     @NonNull final PBBAPopupCallback callback) {
+                                     @NonNull final PBBAPopupCallback callback, final long timeoutTS) {
 
         verifyActivity(activity);
 
@@ -147,6 +150,10 @@ public final class PBBAAppUtils {
             throw new IllegalArgumentException("callback == null");
         }
 
+        if (timeoutTS == 0) {
+            throw new IllegalArgumentException("Timeout should be more than 0");
+        }
+
         final FragmentManager fragmentManager = activity.getSupportFragmentManager();
         final PBBAPopup fragment = (PBBAPopup) fragmentManager.findFragmentByTag(PBBAPopup.TAG);
 
@@ -161,6 +168,16 @@ public final class PBBAAppUtils {
                 }
                 openBankingApp(activity, secureToken);
                 return;
+            } else {
+                final PBBAPopupIntermediaryFragment newFragment = PBBAPopupIntermediaryFragment.newInstance(secureToken, brn, timeoutTS);
+                newFragment.setCallback(callback);
+
+                final FragmentTransaction transaction = fragmentManager.beginTransaction();
+                if (fragment != null) {
+                    transaction.remove(fragment);
+                }
+                transaction.add(newFragment, PBBAPopup.TAG).commit();
+                return;
             }
         } else {
             //disable auto bank opening in case of no PBBA enabled App installed (or has been uninstalled)
@@ -173,10 +190,14 @@ public final class PBBAAppUtils {
                 //same type of popup is already displayed, only reconnect is needed
                 popupFragment.setCallback(callback);
                 return;
+            } else {
+                popupFragment.setTransactionInfo(secureToken, brn, timeoutTS);
+                popupFragment.setCallback(callback);
+                return;
             }
         }
 
-        final PBBAPopupFragment newFragment = PBBAPopupFragment.newInstance(secureToken, brn);
+        final PBBAPopupFragment newFragment = PBBAPopupFragment.newInstance(secureToken, brn, timeoutTS);
         newFragment.setCallback(callback);
 
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -196,7 +217,7 @@ public final class PBBAAppUtils {
      * @param errorMessage The error message to display.
      * @param callback     The callback listener for the popup. The popup keeps {@link java.lang.ref.WeakReference} to the callback.
      * @see PBBAPopupCallback
-     * @see #showPBBAPopup(FragmentActivity, String, String, PBBAPopupCallback)
+     * @see #showPBBAPopup(FragmentActivity, String, String, PBBAPopupCallback, long)
      * @see #dismissPBBAPopup(FragmentActivity)
      * @see #setPBBAPopupCallback(FragmentActivity, PBBAPopupCallback)
      */
@@ -229,6 +250,19 @@ public final class PBBAAppUtils {
     }
 
     /**
+     * Show the Pay by Bank app About Popup.
+     *
+     * @param activity The activity to use.
+     */
+    public static void showPBBAPopupAbout(@NonNull final FragmentActivity activity) {
+        verifyActivity(activity);
+        final FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        final FragmentTransaction transaction = fragmentManager.beginTransaction();
+        final PBBAPopupAboutFragment newFragment = PBBAPopupAboutFragment.newInstanceAbout();
+        transaction.add(newFragment, PBBAPopup.TAG).commit();
+    }
+
+    /**
      * Set the callback listener for the popup currently displayed (if any). Use this method to reconnect to the popup in case of orientation change. If there is no
      * popup shown then this method has no effect. If the activity implements the {@link PBBAPopupCallback} interface then the popup automatically reconnects
      * to the activity on attach. This method takes precedence over the automatic reconnecting, so if this method has been called with a valid callback listener before
@@ -238,7 +272,7 @@ public final class PBBAAppUtils {
      * @param activity The activity to use.
      * @param callback The callback listener for the popup. The popup keeps {@link java.lang.ref.WeakReference} to the callback.
      * @return True if the callback is set (the popup is displayed), false otherwise.
-     * @see #showPBBAPopup(FragmentActivity, String, String, PBBAPopupCallback)
+     * @see #showPBBAPopup(FragmentActivity, String, String, PBBAPopupCallback, long)
      * @see #showPBBAErrorPopup(FragmentActivity, String, String, String, PBBAPopupCallback)
      */
     @SuppressWarnings({"BooleanMethodNameMustStartWithQuestion", "ElementOnlyUsedFromTestCode", "UnusedReturnValue"})
@@ -267,7 +301,7 @@ public final class PBBAAppUtils {
      *
      * @param activity The activity to use.
      * @return True if the popup was dismissed, false if there was no popup displayed (so there was nothing to dismiss).
-     * @see #showPBBAPopup(FragmentActivity, String, String, PBBAPopupCallback)
+     * @see #showPBBAPopup(FragmentActivity, String, String, PBBAPopupCallback, long)
      * @see #showPBBAErrorPopup(FragmentActivity, String, String, String, PBBAPopupCallback)
      */
     @SuppressWarnings({"BooleanMethodNameMustStartWithQuestion", "ElementOnlyUsedFromTestCode"})

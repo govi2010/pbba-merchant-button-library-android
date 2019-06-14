@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    tools:showIn="@layout/pbba_popup_about">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="@dimen/pbba_popup_margin_footer"
+        android:layout_marginRight="@dimen/pbba_popup_margin_footer"
+        android:layout_marginBottom="@dimen/pbba_footer_margin_bottom"
+        android:contentDescription="@string/pbba_footer_content_description"
+        app:srcCompat="@drawable/ic_powered_by_mc_svg" />
+</RelativeLayout>

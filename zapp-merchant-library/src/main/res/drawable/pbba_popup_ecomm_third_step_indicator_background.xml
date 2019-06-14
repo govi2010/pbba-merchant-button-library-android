@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <stroke
+        android:width="@dimen/pbba_popup_border_width"
+        android:color="@color/pbba_popup_background_color" />
+    <solid android:color="@color/pbba_popup_about_indicator_background_color" />
+
+    <size
+        android:width="@dimen/pbba_indicator_third_step_size"
+        android:height="@dimen/pbba_indicator_third_step_size" />
+</shape>
