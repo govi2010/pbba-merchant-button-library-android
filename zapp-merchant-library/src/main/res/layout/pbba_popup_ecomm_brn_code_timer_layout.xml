@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:showIn="@layout/pbba_popup_fragment">
+
+    <include
+        android:id="@+id/code_letters_block"
+        layout="@layout/pbba_popup_section_code_letters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/pbba_timer_layout_margin"
+        android:layout_marginRight="@dimen/pbba_timer_layout_margin"
+        android:layout_marginTop="@dimen/pbba_popup_ecomm_section_code_margin_top" />
+
+    <com.zapp.library.merchant.ui.view.CustomTextView
+        style="@style/PBBAPopup.Text.Timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/pbba_popup_ecomm_third_step_message_margin_top"
+        android:text="@string/pbba_popup_ecomm_refresh_message_first_part"
+        android:textAlignment="center" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/pbba_timer_layout_message_margin_bottom"
+        android:orientation="horizontal">
+
+        <com.zapp.library.merchant.ui.view.CustomTextView
+            android:id="@+id/pbba_popup_timer_value"
+            style="@style/PBBAPopup.Text.TimerValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/pbba_popup_ecomm_third_step_counter_margin"
+            android:layout_marginRight="@dimen/pbba_popup_ecomm_third_step_counter_margin"
+            android:background="@drawable/pbba_popup_ecomm_count_background_green"
+            android:paddingLeft="@dimen/pbba_popup_ecomm_third_step_counter_padding"
+            android:paddingRight="@dimen/pbba_popup_ecomm_third_step_counter_padding"
+            android:textAlignment="center"
+            android:textColor="@color/pbba_code_text_color"
+            tools:text="180" />
+
+        <com.zapp.library.merchant.ui.view.CustomTextView
+            style="@style/PBBAPopup.Text.Timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pbba_popup_ecomm_refresh_message_second_part"
+            android:textAlignment="center" />
+    </LinearLayout>
+</LinearLayout>

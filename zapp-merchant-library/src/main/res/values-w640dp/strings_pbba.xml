@@ -1,15 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="pbba_ecomm_first_step_text">%1$s to your mobile\nbanking app.</string>
+    <string name="pbba_ecomm_first_step_log_in">Log in</string>
 
-    <!-- Font configuration for Pay by Bank app logo (the Panton-Bold.otf texts parts of the buttons will be images) -->
+    <string name="pbba_ecomm_second_step_text">%1$s the %2$s\noption.</string>
+    <string name="pbba_ecomm_second_step_find">Find</string>
+    <string name="pbba_ecomm_second_step_pay_by_bank">Pay by Bank app</string>
+    <string name="exception_request_expired_message">Tap on the button below to generate a new code.</string>
 
-    <!-- Font configuration for Pay by Bank app popups -->
+    <string name="pbba_ecomm_third_step_text">%1$s the above code\nfor secure payment.</string>
+    <string name="pbba_ecomm_third_step_enter">Enter</string>
 
-    <!-- Pay by Bank app button texts -->
-
-    <!-- Pay by Bank app popup texts -->
-    <string name="pbba_popup_pay_with_another_device_title">Pay on another device</string>
-    <string name="pbba_popup_submit_code_title">Follow the steps on the right to complete this purchase on another device</string>
-
-    <!-- Error popup -->
+    <string name="pbba_name">your\nmobile banking app</string>
+    <string name="pbba_popup_open_banking_app_call_to_action">Tap the button below to open %s and log in\nto complete your request.</string>
 
 </resources>

@@ -2,9 +2,14 @@
 <resources>
     <!-- Pay by Bank app button colour properties -->
     <color name="pbba_button_border_color">@color/pbba_button_background_color</color>
-    <color name="pbba_button_background_color">#FF691E</color>
+    <color name="pbba_button_grey_border_color">@color/pbba_button_grey_background_color</color>
+    <color name="pbba_button_background_color">#ff6e00</color>
+    <color name="pbba_button_grey_background_color">#DDDEDF</color>
     <color name="pbba_button_foreground_color">#ffffff</color>
     <color name="pbba_button_pressed_background_color">#FFB48E</color>
+    <color name="pbba_button_grey_pressed_background_color">#DDDEDF</color>
+    <color name="pbba_button_more_about_text_color">#000000</color>
+    <color name="pbba_dark_text_color">#231f20</color>
 
     <!-- Pay by Bank app popup colour properties -->
     <color name="pbba_popup_border_color">@color/pbba_button_background_color</color>
@@ -18,12 +23,11 @@
     <!-- Pay by Bank app ecomm popup properties -->
     <!--30% alpha of pbba_popup_secondary_foreground_color -->
     <color name="pbba_popup_ecomm_indicator_one_color">#4Df35414</color>
-    <!--50% alpha of pbba_popup_secondary_foreground_color -->
-    <color name="pbba_popup_ecomm_indicator_two_color">#80f35414</color>
-    <!--75% alpha of pbba_popup_secondary_foreground_color -->
-    <color name="pbba_popup_ecomm_indicator_three_color">#bff35414</color>
     <!--100% alpha opacity -->
     <color name="pbba_popup_ecomm_indicator_four_color">@color/pbba_popup_secondary_foreground_color</color>
+
+    <color name="pbba_popup_about_indicator_color">#ffffff</color>
+    <color name="pbba_popup_about_indicator_background_color">#f37021</color>
 
     <color name="pbba_popup_ecomm_vertical_separator_color">@color/pbba_popup_separator_color</color>
 
@@ -31,7 +35,7 @@
     <color name="pbba_code_border_color">@color/pbba_popup_ecomm_indicator_four_color</color>
     <color name="pbba_code_separator_color">@color/pbba_popup_separator_color</color>
     <color name="pbba_code_background_color">@color/pbba_popup_background_color</color>
-    <color name="pbba_code_text_color">@color/pbba_popup_foreground_color</color>
+    <color name="pbba_code_text_color">@color/pbba_popup_background_color</color>
 
     <!-- Pingit light theme colour properties -->
     <color name="pingit_light_button_border_color">#3dabee</color>
@@ -42,5 +46,14 @@
     <color name="pingit_dark_button_border_color">#31a583</color>
     <color name="pingit_dark_button_background_color">#31a583</color>
     <color name="pingit_dark_button_pressed_background_color">#9ad1c1</color>
+
+    <!--Pay by bank app Error section-->
+    <color name="pbba_popup_error_text_color">#231f20</color>
+    <color name="pbba_error_button_text_color">#ffffff</color>
+    <color name="pbba_error_button_pressed_background_color">#54f37021</color>
+    <color name="pbba_error_button_default_background_color">#f37021</color>
+
+
+    <color name="pbba_step_message_orange_color">#ff6e00</color>
 
 </resources>

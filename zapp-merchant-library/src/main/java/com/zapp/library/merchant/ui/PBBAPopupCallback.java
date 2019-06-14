@@ -41,10 +41,20 @@ public interface PBBAPopupCallback {
      * Event callback for tap on the 'X' (top-right corner, popup dismiss) button on any Pay by Bank app popup. This callback method is also called in case of dismissing
      * any Pay by Bank app using the {@link com.zapp.library.merchant.util.PBBAAppUtils#dismissPBBAPopup(FragmentActivity)} API.
      *
-     * @see com.zapp.library.merchant.util.PBBAAppUtils#showPBBAPopup(FragmentActivity, String, String, PBBAPopupCallback)
+     * @see com.zapp.library.merchant.util.PBBAAppUtils#showPBBAPopup(FragmentActivity, String, String, PBBAPopupCallback, long)
      * @see com.zapp.library.merchant.util.PBBAAppUtils#showPBBAErrorPopup(FragmentActivity, String, String, String, PBBAPopupCallback)
      * @see com.zapp.library.merchant.util.PBBAAppUtils#dismissPBBAPopup(FragmentActivity)
      */
     void onDismissPopup();
+
+    /**
+     * Event callback for starting timer count down from Pay by Bank app popup.
+     */
+    void onStartTimer();
+
+    /**
+     * Event callback when timer count down finish and notify that timeout expired.
+     */
+    void onEndTimer();
 
 }

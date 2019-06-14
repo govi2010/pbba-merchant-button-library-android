@@ -1,4 +1,4 @@
-# ZappMerchantLib-R2-Android
+# PbBa Merchant Button Library - Android
 
 The **Pay by Bank app** Merchant Library for Android makes it easy for you to add Pay by Bank app as a new payment method.
  

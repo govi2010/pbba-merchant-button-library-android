@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingDefaultResource">
 
     <!--
         Pay by Bank app button properties
@@ -8,35 +8,110 @@
     <!--
         Pay by Bank app popup properties
     -->
-    <!-- Generic properties -->
-    <dimen name="pbba_popup_header_title_margin_top">20dp</dimen>
 
     <dimen name="pbba_popup_container_width">600dp</dimen>
 
     <dimen name="pbba_popup_content_margin_horizontal">32dp</dimen>
-    <dimen name="pbba_popup_content_margin_vertical">24dp</dimen>
 
     <dimen name="pbba_popup_vertical_separator_horizontal_margin_left">@dimen/pbba_popup_content_margin_horizontal</dimen>
     <dimen name="pbba_popup_vertical_separator_horizontal_margin_right">@dimen/pbba_popup_content_margin_horizontal</dimen>
 
     <!-- MComm popup properties -->
     <dimen name="pbba_popup_mcomm_open_banking_app_call_to_action_margin_top">16dp</dimen>
-    <dimen name="pbba_popup_mcomm_open_banking_app_call_to_action_margin_bottom">40dp</dimen>
+    <dimen name="pbba_popup_mcomm_open_banking_app_call_to_action_margin_bottom">16dp</dimen>
+    <dimen name="pbba_popup_mcomm_more_about_container_margin_top">10dp</dimen>
+    <dimen name="pbba_popup_mcomm_text_message_min_height">60dp</dimen>
+    <dimen name="pbba_popup_body_text_heading_font_size">16sp</dimen>
+    <dimen name="pbba_popup_body_contain_text_size">14sp</dimen>
+    <dimen name="pbba_popup_body_margin_top_bottom">10dp</dimen>
+    <dimen name="pbba_popup_body_container_margin">20dp</dimen>
+    <dimen name="pbba_popup_button_height">40dp</dimen>
+    <dimen name="pbba_popup_container_top_margin">40dp</dimen>
+    <dimen name="pbba_popup_more_about_link_bottom_padding">10dp</dimen>
+    <dimen name="pbba_popup_divider_margin_bottom">20dp</dimen>
+    <dimen name="pbba_popup_divider_margin_top">10dp</dimen>
 
     <!-- EComm popup properties -->
-    <dimen name="pbba_popup_ecomm_title_text_font_size">18sp</dimen>
-    <dimen name="pbba_popup_ecomm_body_margin_top">20dp</dimen>
-    <dimen name="pbba_popup_ecomm_body_text_one_margin_top">24dp</dimen>
-    <dimen name="pbba_popup_ecomm_body_text_two_margin_top">20dp</dimen>
-    <dimen name="pbba_popup_ecomm_body_code_margin_top">28dp</dimen>
-    <dimen name="pbba_popup_ecomm_body_code_margin_bottom">32dp</dimen>
     <dimen name="pbba_popup_ecomm_indicator_background_radius">2dp</dimen>
     <dimen name="pbba_popup_ecomm_item_indicator_width">2dp</dimen>
     <dimen name="pbba_popup_ecomm_item_indicator_margin_right">10dp</dimen>
     <dimen name="pbba_popup_ecomm_item_padding_top_bottom">2dp</dimen>
-    <dimen name="pbba_popup_ecomm_item_four_space">10dp</dimen>
+    <dimen name="pbba_popup_ecomm_layout_margin">25dp</dimen>
+    <dimen name="pbba_popup_ecomm_layout_margin_left">50dp</dimen>
+    <dimen name="pbba_popup_ecomm_layout_margin_right">50dp</dimen>
+    <dimen name="pbba_popup_about_available_apps_height">20dp</dimen>
+    <dimen name="pbba_popup_about_available_apps_margin">6dp</dimen>
+    <dimen name="pbba_popup_ecomm_available_banks_margin_top">15dp</dimen>
+    <dimen name="pbba_popup_ecomm_third_step_width">167dp</dimen>
+    <dimen name="pbba_popup_ecomm_third_step_margin_left">10dp</dimen>
+    <dimen name="pbba_popu_ecomm_third_step_margin_top">15dp</dimen>
+    <dimen name="pbba_popup_ecomm_step_third_margin">27dp</dimen>
+    <dimen name="pbba_popup_margin_footer">23dp</dimen>
+    <dimen name="pbba_code_text_item_size">12sp</dimen>
+    <dimen name="pbba_popup_headermargintop">20dp</dimen>
+    <dimen name="pbba_popup_headerheight">26dp</dimen>
 
-    <!-- 'What is Pay by Bank app?' section properties -->
-    <dimen name="pbba_popup_more_info_height">44dp</dimen>
+    <!--Error layout-->
+    <dimen name="pbba_error_popup_desc_text_margin_top">5dp</dimen>
+    <dimen name="pbba_error_message_margin">7dp</dimen>
+    <dimen name="pbba_error_title_margin_top">9dp</dimen>
+    <dimen name="pbba_error_message_margin_top">6dp</dimen>
+    <dimen name="pbba_error_button_margin_top">10dp</dimen>
+    <dimen name="pbba_error_button_margin_bottom">10dp</dimen>
+    <dimen name="pbba_error_title_text_font_size">12sp</dimen>
+    <dimen name="pbba_error_message_text_font_size">9sp</dimen>
+    <dimen name="pbba_error_button_font_size">11sp</dimen>
+    <dimen name="pbba_error_button_width">135dp</dimen>
+    <dimen name="pbba_error_button_height">23dp</dimen>
+    <dimen name="pbba_popup_ecomm_third_step_height">131dp</dimen>
+    <dimen name="pbba_error_icon_margin_top">9dp</dimen>
+    <dimen name="pbba_indicator_third_step_size">27dp</dimen>
+    <dimen name="pbba_vector_image_height">142dp</dimen>
+    <dimen name="pbba_vector_image_width">76dp</dimen>
+    <dimen name="pbba_step_layout_margin_top">2dp</dimen>
+    <dimen name="pbba_footer_margin_bottom">20dp</dimen>
+    <dimen name="pbba_section_code_size">20dp</dimen>
+    <dimen name="pbba_ecomm_indicator_text_size">13sp</dimen>
+    <dimen name="pbba_header_logo_margin_start">25dp</dimen>
+    <dimen name="pbba_available_bank_width">20dp</dimen>
+    <dimen name="pbba_available_bank_height">65dp</dimen>
+    <dimen name="pbba_popup_timer_message_font_size">10sp</dimen>
+
+    <dimen name="pbba_popup_about_how_it_works_margin">15dp</dimen>
+    <dimen name="pbba_popup_about_step_indicator_height">23dp</dimen>
+    <dimen name="pbba_popup_about_step_indicator_width">30dp</dimen>
+    <dimen name="pbba_popup_about_available_apps_block_margin">20dp</dimen>
+    <dimen name="pbba_popup_mcomm_title_margin_top">20dp</dimen>
+    <dimen name="pbba_popup_about_how_it_img_marginright">85dp</dimen>
+    <dimen name="pbba_popup_about_how_it_works_margin_top">10dp</dimen>
+    <dimen name="pbba_popup_about_text_margin_top">6dp</dimen>
+    <dimen name="pbba_popup_about_margin_left">25dp</dimen>
+    <dimen name="pbba_popup_footer_margin_right">10dp</dimen>
+    <!--more about popup landscape-->
+    <dimen name="pbba_popup_margin_top">15dp</dimen>
+    <dimen name="pbban_popup_textview_textsize">14sp</dimen>
+    <dimen name="pbban_popup_title_text_size">14sp</dimen>
+    <dimen name="pbba_popup_how_it_works_desc_textsize">12sp</dimen>
+    <dimen name="pbba_popup_how_it_works_desctext_marginetop">12dp</dimen>
+    <dimen name="pbba_popup_more_about_image_margintop">5dp</dimen>
+    <dimen name="pbba_popup_more_about_image_svg_width">274dp</dimen>
+    <dimen name="pbba_popup_section_available_bank_apps_textsize">12sp</dimen>
+    <dimen name="pbba_popup_section_header_close_image_width">14dp</dimen>
+    <dimen name="pbba_popup_section_header_close_image_height">14dp</dimen>
+    <dimen name="pbba_popup_section_header_close_margin_right">40dp</dimen>
+    <dimen name="pbba_popup_section_header_popup_pay_by_bank_app_logo_text_width">130dp</dimen>
+    <dimen name="pbba_popup_section_header_popup_pay_by_bank_app_logo_text_height">23dp</dimen>
+    <dimen name="pbba_popup_ecomm_layout_margin_top">9dp</dimen>
+    <dimen name="pbba_popup_ecomm_step_text_margin_top">10dp</dimen>
+    <dimen name="pbba_timer_message_margin_top">8dp</dimen>
+    <dimen name="pbba_popup_more_about_availableappsmargin_top">18dp</dimen>
+    <dimen name="pbba_button_bank_logo_container_height">25dp</dimen>
+    <dimen name="pbba_button_bank_logo_container_width">63dp</dimen>
+    <dimen name="pbba_available_bank_apps_container_height">40dp</dimen>
+    <dimen name="pbba_popup_body_text_font_size">12sp</dimen>
+
+
+    <dimen name="pbba_ecomm_second_step_text_view_size">13sp</dimen>
+
 
 </resources>

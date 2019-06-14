@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pbba_popup_about_available_apps_block"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerVertical="true"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <com.zapp.library.merchant.ui.view.CustomTextView
+        style="@style/PBBAPopup.Text.Regular"
+        android:textSize="@dimen/pbba_ecomm_second_step_text_view_size"
+        android:textColor="@color/pbba_dark_text_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pbba_popup_about_available" />
+
+    <LinearLayout
+        android:id="@+id/pbba_popup_available_banking_app"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/pbba_popup_about_divider"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/pbba_popup_about_available_apps_first"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/pbba_available_bank_apps_container_height"
+            android:layout_marginTop="@dimen/pbba_popup_about_available_apps_margin"
+            android:divider="@drawable/pbba_popup_about_divider"
+            android:orientation="horizontal"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/pbba_popup_about_available_apps_second"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/pbba_available_bank_apps_container_height"
+            android:layout_marginTop="@dimen/pbba_popup_about_available_apps_margin"
+            android:divider="@drawable/pbba_popup_about_divider"
+            android:orientation="horizontal"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

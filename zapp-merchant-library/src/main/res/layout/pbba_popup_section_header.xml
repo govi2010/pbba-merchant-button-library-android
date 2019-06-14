@@ -1,32 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:id="@id/pbba_popup_header"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:contentDescription="@string/pbba_accessibility_dialog_title"
-    tools:showIn="@layout/pbba_popup_fragment_ecomm">
+    android:layout_height="wrap_content">
 
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/pbba_popup_close"
-        style="@style/PBBAPopup.Close"
-        android:contentDescription="@string/pbba_accessibility_close_popup_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/pbba_popup_close"
-        android:tint="@color/pbba_popup_foreground_color"
-        tools:ignore="RtlHardcoded" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pbba_popup_headerheight"
+        android:layout_marginTop="@dimen/pbba_popup_headermargintop"
+        tools:showIn="@layout/pbba_popup_about">
 
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/pbba_popup_pay_by_bank_app_logo_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/pbba_popup_header_title_margin_top"
-        android:src="@drawable/pbba_popup_pay_by_bank_app_textimage"
-        android:tint="@color/pbba_popup_foreground_color"
-        tools:ignore="UnusedIds" />
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/pbba_popup_close"
+            android:layout_marginRight="@dimen/pbba_popup_close_margin_right"
+            android:layout_width="wrap_content"
+            android:paddingRight="@dimen/pbba_popup_close_padding"
+            android:paddingLeft="@dimen/pbba_popup_close_padding"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/pbba_accessibility_close_popup_button"
+            app:srcCompat="@drawable/ic_close_svg"
+            tools:ignore="RtlHardcoded" />
 
-</RelativeLayout>
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/pbba_popup_pay_by_bank_app_logo_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:layout_centerInParent="true"
+            app:srcCompat="@drawable/ic_pbba_logo_black_svg"
+            tools:ignore="UnusedIds" />
+    </RelativeLayout>
+</FrameLayout>

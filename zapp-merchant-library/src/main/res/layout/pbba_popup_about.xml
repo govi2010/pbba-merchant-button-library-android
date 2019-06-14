@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pbba="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="top"
+  >
+
+    <include
+        android:id="@+id/pbba_popup_section_header"
+        layout="@layout/pbba_popup_section_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/pbba_popup_footer"
+        android:layout_below="@+id/pbba_popup_section_header"
+        android:layout_centerInParent="true"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            
+            <com.zapp.library.merchant.ui.view.CustomTextView
+                style="@style/PBBAPopup.Text.Body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/pbba_popup_about_text_margin_top"
+                android:text="@string/pbba_popup_about_title"
+                android:textAlignment="center" />
+
+            <com.zapp.library.merchant.ui.view.CustomTextView
+                style="@style/PBBAPopup.Text.Body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/pbba_popup_about_title_text_margin_top"
+                android:text="@string/pbba_popup_about_subtitle"
+                android:textAlignment="center" />
+
+            <com.zapp.library.merchant.ui.view.CustomTextView
+                android:textSize="@dimen/pbban_popup_title_text_size"
+                android:textColor="@color/pbba_dark_text_color"
+                style="@style/PBBAPopup.Text.SemiBold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/pbba_popup_about_how_it_works_margin_top"
+                android:text="@string/pbba_popup_about_how_it_works"
+                android:textAlignment="center" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="@dimen/pbba_popup_about_how_it_works_margin"
+
+                android:orientation="vertical"
+                >
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <ImageView
+                        android:id="@+id/pbba_popup_about_first_indicator"
+                        android:layout_width="@dimen/pbba_popup_about_step_indicator_width"
+                        android:layout_height="@dimen/pbba_popup_about_step_indicator_height"
+                        android:layout_centerVertical="true"
+                        android:contentDescription="@string/pbba_popup_about_indicator_first"
+                        pbba:srcCompat="@drawable/pbba_popup_about_description_step_1" />
+
+                    <com.zapp.library.merchant.ui.view.CustomTextView
+                        style="@style/PBBAPopup.Text.Description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/pbba_popup_about_how_it_works_margin"
+                        android:layout_marginLeft="@dimen/pbba_popup_about_how_it_works_margin_left"
+                        android:layout_toEndOf="@id/pbba_popup_about_first_indicator"
+                        android:layout_toRightOf="@id/pbba_popup_about_first_indicator"
+                        android:gravity="start"
+                        android:textAlignment="viewStart"
+                        pbba:htmlText="@string/pbba_popup_about_how_it_works_first" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/pbba_popup_about_how_it_works_margin">
+
+                    <ImageView
+                        android:id="@+id/pbba_popup_about_second_indicator"
+                        android:layout_width="@dimen/pbba_popup_about_step_indicator_width"
+                        android:layout_height="@dimen/pbba_popup_about_step_indicator_height"
+                        android:contentDescription="@string/pbba_popup_about_indicator_second"
+                        android:layout_centerVertical="true"
+                        pbba:srcCompat="@drawable/pbba_popup_about_description_step_2" />
+
+                    <com.zapp.library.merchant.ui.view.CustomTextView
+                        style="@style/PBBAPopup.Text.Description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/pbba_popup_about_how_it_works_margin"
+                        android:layout_marginLeft="@dimen/pbba_popup_about_how_it_works_margin_left"
+                        android:layout_toEndOf="@id/pbba_popup_about_second_indicator"
+                        android:layout_toRightOf="@id/pbba_popup_about_second_indicator"
+                        android:gravity="start"
+                        android:text="@string/pbba_popup_about_how_it_works_second"
+                        android:textAlignment="viewStart" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/pbba_popup_about_how_it_works_margin">
+
+                    <ImageView
+                        android:id="@+id/pbba_popup_about_third_indicator"
+                        android:layout_width="@dimen/pbba_popup_about_step_indicator_width"
+                        android:layout_height="@dimen/pbba_popup_about_step_indicator_height"
+                        android:layout_centerVertical="true"
+                        android:contentDescription="@string/pbba_popup_about_indicator_third_moreabout"
+                        pbba:srcCompat="@drawable/pbba_popup_about_description_step_3" />
+
+                    <com.zapp.library.merchant.ui.view.CustomTextView
+                        style="@style/PBBAPopup.Text.Description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/pbba_popup_about_how_it_works_margin"
+                        android:layout_marginLeft="@dimen/pbba_popup_about_how_it_works_margin_left"
+                        android:layout_toEndOf="@id/pbba_popup_about_third_indicator"
+                        android:layout_toRightOf="@id/pbba_popup_about_third_indicator"
+                        android:gravity="start"
+                        android:text="@string/pbba_popup_about_how_it_works_third"
+                        android:textAlignment="viewStart" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <include
+                android:id="@+id/pbba_popup_about_available_apps_block"
+                layout="@layout/pbba_popup_section_available_bank_apps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/pbba_popup_about_available_apps_block_margin"
+                 />
+        </LinearLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/pbba_popup_footer"
+        layout="@layout/pbba_popup_section_footer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/pbba_footer_margin_top"
+        android:gravity="center_horizontal" />
+
+</RelativeLayout>

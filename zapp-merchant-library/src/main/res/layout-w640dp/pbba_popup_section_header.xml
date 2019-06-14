@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/pbba_popup_headermargintop">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/pbba_popup_close"
+            android:layout_width="@dimen/pbba_popup_section_header_close_image_width"
+            android:layout_height="@dimen/pbba_popup_section_header_close_image_height"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/pbba_popup_section_header_close_margin_right"
+            android:contentDescription="@string/pbba_accessibility_close_popup_button"
+            app:srcCompat="@drawable/ic_close_svg"
+            tools:ignore="RtlHardcoded" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/pbba_popup_pay_by_bank_app_logo_text"
+            android:layout_width="@dimen/pbba_popup_section_header_popup_pay_by_bank_app_logo_text_width"
+            android:layout_height="@dimen/pbba_popup_section_header_popup_pay_by_bank_app_logo_text_height"
+            android:focusable="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/pbba_header_logo_margin_start"
+            android:layout_marginLeft="@dimen/pbba_header_logo_margin_start"
+             app:srcCompat="@drawable/ic_pbba_logo_black_svg"
+            tools:ignore="UnusedIds" />
+    </RelativeLayout>
+</FrameLayout>

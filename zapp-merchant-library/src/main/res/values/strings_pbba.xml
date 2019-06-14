@@ -4,45 +4,86 @@
     <string name="pbba_button_font">@string/pbba_popup_semibold_font</string>
 
     <!-- Font configuration for Pay by Bank app popups -->
-    <string name="pbba_popup_regular_font">fonts/SourceSansPro-Regular.otf</string>
-    <string name="pbba_popup_semibold_font">fonts/SourceSansPro-Semibold.otf</string>
-    <string name="pbba_popup_bold_font">fonts/SourceSansPro-Bold.otf</string>
+    <string name="pbba_popup_regular_font">fonts/MarkForMC.ttf</string>
+    <string name="pbba_popup_semibold_font">fonts/MarkForMC-Med.ttf</string>
+    <string name="pbba_popup_bold_font">fonts/MarkForMC-Bold.ttf</string>
+    <string name="pbba_popup_heavy_font">fonts/MarkForMC-Heavy.ttf</string>
 
     <!-- Pay by Bank app button texts -->
     <string name="pbba_button_text_open_banking_app">Open banking app</string>
     <string name="pbba_button_text_open_banking_app_co_branded">Open Pingit</string>
     <string name="pbba_button_text_get_code_pre">Get\u0020\u0020</string>
+    <string name="pbba_button_text_get_code_post">code</string>
 
+    <!-- More about Pay by Bank app texts -->
+    <string name="pbba_button_more_about_info_firstline_text">Pay securely using your own banking app.</string>
+    <string name="pbba_button_more_about_info_secondline_text">More about Pay by Bank app</string>
+    <string name="pbba_button_more_about_info_custom_button_secondline_text">More about Pay by Bank app ></string>
     <!--CFI app name-->
     <string name="pingit">Pingit</string>
-    <string name="pbba_name">your mobile banking app</string>
+    <string name="pbba_name">your\nmobile banking app</string>
+    <string name="pbba_name_other_device">your mobile banking app</string>
 
-    <!-- Pay by Bank app popup texts -->
-    <string name="pbba_popup_what_is_pay_by_bank_app">What is Pay by Bank app? \u2192</string>
-
-    <string name="pbba_popup_pay_on_this_device_title">Pay on this device</string>
-    <string name="pbba_popup_open_banking_app_call_to_action">Tap the button below to open %s and log in to complete your purchase</string>
-    <string name="pbba_popup_pay_with_another_device_title">Pay with another device</string>
-    <string name="pbba_popup_pay_with_another_device_call_to_action">Tap the button below if %s is on another device</string>
-
-    <string name="pbba_popup_no_bank_app_message">None of the apps on this device currently support Pay by Bank app.</string>
-    <string name="pbba_popup_submit_code_title">Follow the steps below to complete this purchase on another device:</string>
-
-    <string name="pbba_popup_ecomm_item_one_text"><![CDATA[<b>Pick</b> up your phone or tablet]]></string>
-    <string name="pbba_popup_ecomm_item_two_text"><![CDATA[<b>Log in</b> to %s]]></string>
-    <string name="pbba_popup_ecomm_item_three_text"><![CDATA[<b>Select</b> Pay by Bank app]]></string>
-    <string name="pbba_popup_ecomm_item_four_text_one"><![CDATA[<b>Enter</b> the]]></string>
-    <string name="pbba_popup_ecomm_item_four_text_two">\u0020below</string>
+    <string name="pbba_popup_open_banking_app_call_to_action_header">Continue with current device</string>
+    <string name="pbba_popup_pay_with_another_device_call_to_action_header">Continue with another device</string>
+    <string name="pbba_popup_open_banking_app_call_to_action">Tap the button below to open %s and log in\nto complete your request.</string>
+    <string name="pbba_popup_pay_with_another_device_call_to_action">Tap this button if you use another\ndevice for %s</string>
+    <string name="pbba_popup_ecomm_refresh_message_first_part">Your code will refresh in</string>
+    <string name="pbba_popup_ecomm_refresh_message_second_part">seconds</string>
 
     <string name="pbba_popup_error_generic_title">There has been a problem</string>
     <string name="pbba_popup_error_generic_message">Something went wrong. Please try again!</string>
 
     <!-- Accessibility -->
-    <string name="pbba_accessibility_dialog_title">Pay by Bank app dialog</string>
-    <string name="pbba_accessibility_close_popup_button">Close dialog button.</string>
+    <string name="pbba_accessibility_close_popup_button">Close dialog.</string>
     <string name="pbba_accessibility_pay_by_bank_app_image">Pay by Bank app image</string>
     <string name="pbba_accessibility_get_code_button">Get Pay by Bank app code button. Tap to display the Pay by Bank app code.</string>
     <string name="pbba_accessibility_open_banking_app">Open banking app button. Tap to open your mobile banking app.</string>
     <string name="pbba_accessibility_pay_by_bank_app_button">Pay by Bank app button. Tap to start the Pay by Bank app payment.</string>
+    <string name="pbba_accessibility_more_about_text">More about Pay by Bank app button.</string>
+    <string name="pbba_accessibility_show_brn_view_text">BRN code view.</string>
+    <!-- About-->
+    <string name="pbba_popup_about_title">Use the bank app on your phone\nto pay at online checkouts.</string>
+    <string name="pbba_popup_about_title_landscape">Use the bank app on your phone to pay at online checkouts.</string>
+    <string name="pbba_popup_about_subtitle">No payment details required.</string>
+    <string name="pbba_popup_about_how_it_works">It works like this:</string>
+    <string name="pbba_popup_about_how_it_works_first"><![CDATA[You choose <b>Pay by Bank app</b><br>at the checkout.]]></string>
+    <string name="pbba_popup_about_how_it_works_second">Confirm payment amount\nin your mobile bank app.</string>
+    <string
+        name="pbba_popup_about_how_it_works_third">Happy with everything?\nComplete payment.</string>
+    <string name="pbba_popup_about_available">Works with these banking apps:</string>
+    <string name="pbba_popup_about_indicator_first">step 1</string>
+    <string name="pbba_popup_about_indicator_second">step 2</string>
+    <string name="pbba_popup_about_indicator_third">3</string>
+    <string name="pbba_popup_about_indicator_third_moreabout">step 3</string>
+
+
+    <!-- Error message displayed in case or network connectivity lost or network is unavailable. -->
+    <string name="zapp_error_message_network_error">General network error (A3.1).</string>
+    <!-- This is the default error message which is used if the Merchant Library cannot decide what the specific error is. -->
+    <string name="zapp_error_msg_generic_internal_error">Internal error: undefined error (A3.10).</string>
+    <!-- The error title displayed for all the other error messages. -->
+    <string name="zapp_error_title_generic">An error occurred</string>
+    <string name="exception_network_title">Network error.</string>
+    <string name="exception_no_network_msg">Network connection not available. Please try to connect before using.</string>
+
+    <string name="exception_request_expired">Request expired</string>
+    <string name="exception_request_expired_message">Tap on the button below\nto generate a new code.</string>
+    <string name="pbba_error_button_text">Try again</string>
+
+    <string name="pbba_ecomm_first_step_text">%1$s to your mobile\nbanking app.</string>
+    <string name="pbba_ecomm_first_step_log_in">Log in</string>
+
+    <string name="pbba_ecomm_second_step_text">%1$s the %2$s option.</string>
+    <string name="pbba_ecomm_second_step_find">Find</string>
+    <string name="pbba_ecomm_second_step_pay_by_bank">Pay by Bank\napp</string>
+
+    <string name="pbba_ecomm_third_step_text">%1$s the above code\nfor secure payment.</string>
+    <string name="pbba_ecomm_third_step_enter">Enter</string>
+
+    <string name="pbba_button_content_description">Pay by Bank App image</string>
+    <string name="pbba_footer_content_description">Powered by Mastercard image</string>
+    <string name="accesibility_image_text">image</string>
+
 
 </resources>
