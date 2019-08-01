@@ -15,7 +15,6 @@ import com.zapp.library.merchant.network.response.PBBABankLogoResponse;
 import com.zapp.library.merchant.network.rest.IPBBABankLogoService;
 import com.zapp.library.merchant.network.rest.PBBABankLogoService;
 import com.zapp.library.merchant.util.FilterAvailableBankApps;
-import com.zapp.library.merchant.util.PBBALibraryUtils;
 
 import java.util.Collections;
 import java.util.List;
@@ -52,27 +51,23 @@ public class AvailableBankAppsLoader extends AsyncTaskLoader<PBBABankLogoRespons
         final Context context = getContext().getApplicationContext();
         List<AvailableBankAppsResponse> response = null;
         ZappError error = null;
-        if(!PBBALibraryUtils.getCfiLogosCDNPath(context).isEmpty()) {
-            try {
-                final IPBBABankLogoService gateway = PBBABankLogoService.getInstance(context);
-                response = gateway.getAvailableBankApps();
-                if (response != null) {
-                    response = filterAvailableBankApps.filter(response);
-                    if (response.size() > MAX_COUNT) {
-                        response = response.subList(0, MAX_COUNT);
-                    }
-                    Collections.shuffle(response);
+        try {
+            final IPBBABankLogoService gateway = PBBABankLogoService.getInstance(context);
+            response = gateway.getAvailableBankApps();
+            if (response != null) {
+                response = filterAvailableBankApps.filter(response);
+                if (response.size() > MAX_COUNT) {
+                    response = response.subList(0, MAX_COUNT);
                 }
-            } catch (GenericException e) {
-                Log.w(TAG, e.getMessage(), e);
-                error = new ZappError(ErrorType.GENERIC_INTERNAL_ERROR);
-            } catch (NetworkException e) {
-                Log.w(TAG, e.getMessage(), e);
-                error = new ZappError(ErrorType.NETWORK_ERROR, context.getString(R.string.exception_network_title),
-                        context.getString(R.string.exception_no_network_msg));
+                Collections.shuffle(response);
             }
-        }else{
-                Log.i(TAG,"CDN url is not available.");
+        } catch (GenericException e) {
+            Log.w(TAG, e.getMessage(), e);
+            error = new ZappError(ErrorType.GENERIC_INTERNAL_ERROR);
+        } catch (NetworkException e) {
+            Log.w(TAG, e.getMessage(), e);
+            error = new ZappError(ErrorType.NETWORK_ERROR, context.getString(R.string.exception_network_title),
+                    context.getString(R.string.exception_no_network_msg));
         }
         mPBBABankLogoResponse = new PBBABankLogoResponse(response, error);
         return mPBBABankLogoResponse;
