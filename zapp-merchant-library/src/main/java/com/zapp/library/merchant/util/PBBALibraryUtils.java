@@ -113,7 +113,7 @@ public final class PBBALibraryUtils {
     /**
      * The default value identifier for CFI Logos CDN PATH.
      */
-    private static final String CFI_LOGOS_CDN_PATH_DEFAULT = "";
+    private static final String CFI_LOGOS_CDN_PATH_DEFAULT = "https://paybybankappcdn.mastercard.co.uk/static/ml/pbba-3550ce7763041531b9214e9e23986b37";
 
     /**
      * The custom configuration.

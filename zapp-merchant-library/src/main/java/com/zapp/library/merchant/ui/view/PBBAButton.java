@@ -190,7 +190,7 @@ public class PBBAButton extends RelativeLayout implements LoaderManager.LoaderCa
             mButtonContainer = view.findViewById(R.id.pbba_button_container);
             mButtonContainer.setTag(mButtonContainerTAG);
 
-            mMoreAboutButtonContainer = view.findViewById(R.id.pbba_button_more_about_container_linetwo);
+            mMoreAboutButtonContainer = view.findViewById(R.id.pbba_button_more_about_container);
             mMoreAboutButtonContainer.setTag(mMoreAboutPbBaContainerTAG);
 
             mAnimatedIcon = (ImageView) view.findViewById(R.id.progress);
