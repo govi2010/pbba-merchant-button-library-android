@@ -54,6 +54,12 @@ public final class PBBAAppUtils {
     private static final String ZAPP_URI_FORMAT_STRING = "%s://%s";
 
     /**
+     * Zapp specific URI format string for CFIApp Availability check.
+     */
+    @SuppressWarnings("HardcodedFileSeparator")
+    private static final String CFI_AVAILABILITY_CHECK_URI_FORMAT_STRING = "%s://";
+
+    /**
      * Hidden constructor for utility class.
      */
     private PBBAAppUtils() {
@@ -75,7 +81,8 @@ public final class PBBAAppUtils {
 
         final Intent zappIntent = new Intent();
         final String zappScheme = PBBALibraryUtils.getZappScheme(context);
-        zappIntent.setData(new Uri.Builder().scheme(zappScheme).build());
+        final Uri zappUri = Uri.parse(String.format(CFI_AVAILABILITY_CHECK_URI_FORMAT_STRING, zappScheme));
+        zappIntent.setData(zappUri);
         zappIntent.setAction(Intent.ACTION_VIEW);
         final ResolveInfo resolveInfo = context.getPackageManager().resolveActivity(zappIntent, PackageManager.MATCH_DEFAULT_ONLY);
         return resolveInfo != null;
