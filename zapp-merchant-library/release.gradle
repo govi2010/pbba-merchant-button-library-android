@@ -1,5 +1,5 @@
 // ./gradlew clean build :zapp-merchant-library:generateLibraryRelease
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 def localReleaseDest = "${buildDir}/release/${version}"
 
@@ -25,13 +25,28 @@ task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
 }
 
-uploadArchives {
-    repositories.mavenDeployer {
-        pom.groupId = project.PUBLISH_GROUP_ID
-        pom.artifactId = project.PUBLISH_ARTIFACT_ID
-        pom.version = project.PUBLISH_VERSION
-        // Add other pom properties here if you want (developer details / licenses)
-        repository(url: "file://${localReleaseDest}")
+// uploadArchives {
+//     repositories.mavenDeployer {
+//         pom.groupId = project.PUBLISH_GROUP_ID
+//         pom.artifactId = project.PUBLISH_ARTIFACT_ID
+//         pom.version = project.PUBLISH_VERSION
+//         // Add other pom properties here if you want (developer details / licenses)
+//         repository(url: "file://${localReleaseDest}")
+//     }
+// }
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = project.PUBLISH_GROUP_ID
+            artifactId = project.PUBLISH_ARTIFACT_ID
+            version = project.PUBLISH_VERSION
+            from components.java
+
+            pom {
+                description = 'A description of my library'
+                ...
+            }
+        }
     }
 }
 
